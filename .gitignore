@@ -1,0 +1,8 @@
+.env
+
+Back/app/db.sqlite3
+
+Front/app/node_modules
+Front/app/.pnp
+Front/app/.pnp.js
+Front/app/.DS_Store
