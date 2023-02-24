@@ -1,5 +1,26 @@
 version: "3.9"
 services:
+  db:
+    container_name: db
+    build:  
+      context: ./DB
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./DB/db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 10s
+      timeout: 20s
+      retries: 5
+      start_period: 15s
+
   front:
     container_name: front
     environment:
@@ -21,6 +42,11 @@ services:
       - "8000:8000" 
     volumes:
       - ./back/:/code/back
-
+    env_file:
+      - .env
     command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      db:
+        condition: service_healthy
+
   

@@ -1,8 +1,12 @@
 .env
 
-Back/app/db.sqlite3
+DB/db/*
 
-Front/app/node_modules
+Back/app/db.sqlite3
+Back/app/app/__pycache__
+Back/data/*
+
+Front/app/node_modules/*
 Front/app/.pnp
 Front/app/.pnp.js
 Front/app/.DS_Store
