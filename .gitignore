@@ -3,7 +3,7 @@
 DB/db/*
 
 Back/app/db.sqlite3
-Back/app/app/__pycache__
+*/__pycache__/*
 Back/data/*
 
 Front/app/node_modules/*
