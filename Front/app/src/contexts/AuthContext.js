@@ -7,8 +7,6 @@ const AuthContext = createContext();
 export default AuthContext;
 /* 
     Provee la Autenticación a cada componente que la requiera
-
-
 */
 export const AuthProvider = ({ children }) => {
     // JWT. Los obtiene del localStorage
@@ -23,8 +21,22 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     // Crea al usuario en el backend
-    const signinUser = async (e) => {
+    const signinUser = async (e, setError) => {
         e.preventDefault();
+        let newErrors = [];
+        if (e.target.password.value === "") {
+            newErrors.push("La contraseña es obligatoria");
+        }
+        if (e.target.username.value === "") {
+            newErrors.push("El nombre de usuario es obligatorio");
+        }
+        if (e.target.password.value !== e.target.password2.value) {
+            newErrors.push("Las contraseñas no coinciden");
+        }
+        if (newErrors.length !== 0) {
+            setError(newErrors);
+            return;
+        }
         const url = CONFIG.API_URL + "/create_user";
         let response = await fetch(url, {
             method: "POST",
@@ -43,13 +55,27 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("authTokens", JSON.stringify(data));
             navigate("/");
         } else if (response.status === 409) {
-            alert("El nombre de usuario ya está ocupado");
+            newErrors.push("El nombre de usuario se encuentra en uso");
+            setError(newErrors);
+            return;
         }
     };
 
     // Logea al usuario en el backend y obtiene los JWT
-    const loginUser = async (e) => {
+    const loginUser = async (e, setError) => {
         e.preventDefault();
+        let newErrors = [];
+        if (e.target.password.value === "") {
+            newErrors.push("La contraseña es obligatoria");
+        }
+        if (e.target.username.value === "") {
+            newErrors.push("El nombre de usuario es obligatorio");
+        }
+        if (newErrors.length !== 0) {
+            setError(newErrors);
+            return;
+        }
+
         const url = CONFIG.API_URL + "/api/token/";
         let response = await fetch(url, {
             method: "POST",
@@ -69,7 +95,8 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("authTokens", JSON.stringify(data));
             navigate("/");
         } else {
-            alert("Credenciales Inválidas");
+            newErrors.push("Credenciales Inválidas")
+            setError(newErrors)
         }
     };
 
@@ -90,12 +117,10 @@ export const AuthProvider = ({ children }) => {
         setAuth(false);
         localStorage.removeItem("authTokens");
         navigate("/");
-
     };
 
     // Refresca el token de acceso
     const updateToken = async () => {
-
         const url = CONFIG.API_URL + "/api/token/refresh/";
         let response = await fetch(url, {
             method: "POST",

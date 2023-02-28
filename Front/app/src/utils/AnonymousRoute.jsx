@@ -1,28 +1,25 @@
-import { Navigate } from "react-router-dom";
 import { useContext } from "react";
-import AuthContext from "../contexts/AuthContext";
 import SideBarContext from "../contexts/SideBarContext";
+import ContentWrapperNavbar, {ContentWrapper} from "../components/Global/ContentWrapper";
 import { Navbar } from "../components";
-import ContentWrapperNavbar from "../components/Global/ContentWrapper";
 import { GlobalStyles } from "../components/Global/CSSVariables"
 
-const PrivateRoute = ({ component }) => {
-    let { auth } = useContext(AuthContext);
+const AnonymousRoute = ({ component, navBar }) => {
     let { open } = useContext(SideBarContext);
 
     return (
-        <>
-            <GlobalStyles open={open} />
-            {auth ? (
+        <>  
+        <GlobalStyles open={open}/>
+            {navBar ? (
                 <>
                     <Navbar></Navbar>
                     <ContentWrapperNavbar open={open}>{component}</ContentWrapperNavbar>
                 </>
             ) : (
-                <Navigate to="/" />
+                <ContentWrapper open={open}>{component}</ContentWrapper>
             )}
         </>
     );
 };
 
-export default PrivateRoute;
+export default AnonymousRoute;

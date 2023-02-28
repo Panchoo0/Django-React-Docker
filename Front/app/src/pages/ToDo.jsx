@@ -2,6 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { CONFIG } from "../utils";
 
+import styled, { css } from "styled-components";
+
+
+
 // Función para eliminar un task
 const eliminateTask = async (index, authTokens, task, setTask) => {
     const url = CONFIG.API_URL + "/api/tasks/delete/" + String(index) + "/";

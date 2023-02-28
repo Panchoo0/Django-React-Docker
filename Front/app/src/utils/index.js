@@ -1,2 +1,3 @@
 export { default as PrivateRoute } from "./PrivateRoute";
-export { CONFIG } from "./config";
+export { default as AnonymousRoute } from "./AnonymousRoute";
+export { CONFIG, THEMES } from "./config";
