@@ -141,14 +141,19 @@ export const AuthProvider = ({ children }) => {
             logoutUser();
         }
 
-        setLoading(false);
+        // setLoading(false);
     };
+
+    //Refresca el token al iniciar la app
+    useEffect( () => {
+        setLoading(false)
+        if (loading && authTokens) {
+                updateToken();
+        }
+    },[loading])
 
     // Refresca el token de acceso cada 14 minutos
     useEffect(() => {
-        if (loading) {
-            updateToken();
-        }
 
         const refreshTime = 14 * 60 * 1000;
         let interval = setInterval(() => {
@@ -157,7 +162,7 @@ export const AuthProvider = ({ children }) => {
             }
         }, refreshTime);
         return () => clearInterval(interval);
-    }, [authTokens, loading]);
+    }, [authTokens]);
 
     // Valores provistos por el contexto
     let contextData = {

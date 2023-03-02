@@ -9,9 +9,8 @@ const ContentWrapperNavbar = styled.div`
     height: 100%;
     background: var(--color-body);
     color: var(--color-text);
-    font-size: 30px;
-    font-weight: 900;
-    padding: 30px;
+    font-size: 24px;
+    font-weight: 300;
     
 `;
 
@@ -20,14 +19,11 @@ export default ContentWrapperNavbar;
 export const ContentWrapper = styled.div`
     position: relative;
     min-height: 100vh;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background: var(--color-body);
     color: var(--color-text);
     font-size: 30px;
     font-weight: 900;
-    padding: 30px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
+
 `;

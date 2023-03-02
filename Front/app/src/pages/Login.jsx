@@ -3,19 +3,24 @@ import styled from "styled-components";
 import AuthContext from "../contexts/AuthContext";
 import { MdAccountCircle } from "react-icons/md";
 
+const ContentWrapper = styled.div`
+    height: 100%;
+    display: flex;
+    align-items: center;
+`
 
 const Container = styled.div`
     width: 100%;
-    max-height: 650px;
+    max-height: 600px;
     max-width: 550px;
     height: auto;
-    background-color: var(--color-sage);
-    justify-content: center;
+    background-color: var(--color-component);
+    justify-content: center; 
     display: flex;
     border-radius: 10px;
-    box-shadow: 15px 25px 35px var(--color-text), -15px 25px 35px var(--color-text);
+    box-shadow: 15px 25px 35px var(--color-boxShadow), -15px 25px 35px var(--color-boxShadow);
     padding-bottom: 50px;
-
+    margin: 100px auto;
 `;
 
 const LoginCircle = styled.div`
@@ -24,11 +29,11 @@ const LoginCircle = styled.div`
     height: 155px;
     transform: translateY(-50%);
     position: absolute;
-    background-color: var(--color-sage);
+    background-color: var(--color-component);
     /* z-index: 5; */
     border: solid;
     border-width: 5px;
-    border-color: var(--color-text);
+    border-color: var(--color-border);
 `;
 
 const LoginImage = styled(MdAccountCircle)`
@@ -53,14 +58,14 @@ const Tab = styled.p`
     display: inline-flex;
     width: 45%;
     justify-content: center;
-    color: ${props => props.selected ? "white" : "inherit"};
+    color: ${props => props.selected ? "var(--color-selectedButtonText)" : "var(--color-unSelectedButtonText)"};
     /* border-radius: 40% 40% 0% 0%; */
     min-height: 50px;
     height: auto;
     /* padding: auto; */
     cursor: pointer;
     box-sizing: border-box;
-    background-color: ${(props) => (props.selected ? "var(--color-natuer)" : "inherit")};
+    background-color: ${(props) => (props.selected ? "var(--color-filledButton)" : "inherit")};
     :hover {
         outline: solid 5px var(--color-text);
         transition: all 0.05s ease;
@@ -86,7 +91,7 @@ const BreakLine = styled.div`
 const Input = styled.input`
     display: block;
     width: 100%;
-    background: var(--color-sage);
+    background: var(--color-contrastText);
     border: solid;
     border-width: 3px;
     border-color: ${ (props) => ! props.errors ? "var(--color-text)" : "red"};
@@ -142,10 +147,11 @@ const StyleSubmit = styled.input`
     height: 100%;
     justify-content: center;
     font-size: 24px;
-    background: var(--color-natuer);
+    background: var(--color-filledButton);
     border: solid;
     border-width: 3px;
     border-color: var(--color-text);
+    color: var(--color-contrastText);
     border-radius: 10px;
     cursor: pointer;
 `
@@ -221,11 +227,10 @@ const Login = () => {
 
     const [isLoginForm, setIsLoginForm] = useState(true)
     const [error, setError] = useState([])
-    console.log(error);
 
     return (
 
-        <>
+        <ContentWrapper>
             <Container>
                 <LoginCircle>
                     <LoginImage />
@@ -240,7 +245,7 @@ const Login = () => {
                     {isLoginForm ? <LoginForm error={error} onSubmit={(e) => loginUser(e,setError)}/> : <SigninForm error={error} onSubmit={(e)=>signinUser(e,setError)}/>}
                 </LogForm>
             </Container>
-        </>
+        </ContentWrapper>
     );
 };
 

@@ -46,5 +46,7 @@ def updateTask(request,id):
     task = user.task_set.filter(id=id)
     if not request.data.get("data"):
         return Response({"message":"Falta el nuevo contenido"}, status=status.HTTP_400_BAD_REQUEST)
-    task.update(body=request.data.get("data"))
+    if request.data.get("checked") == None:
+         return Response({"message":"Falta el check"}, status=status.HTTP_400_BAD_REQUEST)
+    task.update(body=request.data.get("data"), checked= request.data.get("checked"))
     return Response({"message":"Se modificó Correctamente"})

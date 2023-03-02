@@ -8,11 +8,11 @@ import { GlobalStyles } from "../components/Global/CSSVariables"
 
 const PrivateRoute = ({ component }) => {
     let { auth } = useContext(AuthContext);
-    let { open } = useContext(SideBarContext);
+    let { open, darkMode } = useContext(SideBarContext);
 
     return (
         <>
-            <GlobalStyles open={open} />
+            <GlobalStyles darkMode={darkMode} />
             {auth ? (
                 <>
                     <Navbar></Navbar>

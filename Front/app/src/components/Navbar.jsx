@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import SideBarContext from "../contexts/SideBarContext";
 import styled from "styled-components";
-import {  FaHome, FaChevronRight, FaListUl, FaChevronLeft } from "react-icons/fa";
+import { FaHome, FaChevronRight, FaListUl, FaChevronLeft } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { FiSun } from "react-icons/fi";
 import { BsMoon } from "react-icons/bs";
@@ -22,12 +22,6 @@ const StyledLink = styled(Link)`
     color: inherit;
     font-size: 24px;
 `;
-/* 
-    Crea su elemento de React
-*/
-// const StyledLink = ({ children, ...info }) => {
-//     return <StyledLink {...info}>{children}</StyledLink>;
-// };
 
 /*
     Nav con toda la barra de navegación
@@ -42,6 +36,7 @@ const SideBar = styled.nav`
     background: var(--color-sidebar);
     padding: 10px 14px;
     z-index: 15;
+    color: var(--color-icons);
 `;
 
 /* 
@@ -49,7 +44,9 @@ const SideBar = styled.nav`
 */
 const Logo = styled.div`
     display: flex;
+    width: 100%;
     align-items: center;
+    color: var(--color-icons);
 `;
 /* 
     Wrapper para la imagen del logo
@@ -59,16 +56,6 @@ const SpanImage = styled.span`
     display: flex;
     align-items: center;
 `;
-
-/* 
-    Texto del logo
-*/
-// const HeaderText = styled.div`
-//     font-size: 24px;
-//     font-weight: 700;
-//     display: flex;
-//     flex-direction: column;
-// `;
 
 /* 
     Texto del logo
@@ -84,6 +71,7 @@ const SpanName = styled.span`
     transition-duration: ${(props) => (props.open ? "0.1s, 0.1s" : "0.15s, 0.3s")};
     transition-delay: ${(props) => (props.open ? "0s, 0.15s" : "0s, 0s")};
     transition-property: visibility, opacity;
+    color: inherit;
 `;
 
 const Header = styled.header`
@@ -100,7 +88,6 @@ const MenuBar = styled.div`
     justify-content: space-between;
 `;
 
-// const Menu = styled.div``;
 
 /*
     Lista Con todas las Apps
@@ -119,8 +106,7 @@ const NavLink = styled.li`
     border-radius: 10px;
     transition: all 0.4s ease;
     :hover {
-        background: #a86464;
-        color: white;
+        background: var(--color-hover);
     }
 `;
 
@@ -130,14 +116,15 @@ const NavLink = styled.li`
 const StyledFaChevronRight = ({ open, onClick }) => {
     return (
         <>
-        {!open ? <FaChevronRightContainer onClick={onClick}>
-            <FaChevronRight size={20}></FaChevronRight>
-        </FaChevronRightContainer> :
-        <FaChevronRightContainer onClick={onClick}>
-            <FaChevronLeft size={20}></FaChevronLeft>
-        </FaChevronRightContainer>
-        
-        }
+            {!open ? (
+                <FaChevronRightContainer onClick={onClick}>
+                    <FaChevronRight size={20}></FaChevronRight>
+                </FaChevronRightContainer>
+            ) : (
+                <FaChevronRightContainer onClick={onClick}>
+                    <FaChevronLeft size={20}></FaChevronLeft>
+                </FaChevronRightContainer>
+            )}
         </>
     );
 };
@@ -148,11 +135,14 @@ const StyledFaChevronRight = ({ open, onClick }) => {
 const FaChevronRightContainer = styled.div`
     position: absolute;
     top: 50%;
-    right: -35px;
+    right: -30px;
     transform: translateY(-50%);
     height: 35px;
     width: 35px;
-    background: #b3e5be;
+    background: var(--color-component);
+    border-style: solid;
+    border-color: var(--color-contrastText);
+    border-width: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -172,20 +162,44 @@ const NavText = styled.span`
     transition-duration: ${(props) => (props.open ? "0.1s, 0.1s" : "0.15s, 0.3s")};
     transition-delay: ${(props) => (props.open ? "0s, 0.15s" : "0s, 0s")};
     transition-property: visibility, opacity;
+    color: inherit;
 `;
 
 /*
-    Icon app de la sidebar
+    Icons de la sidebar
 */
-const TaskIcon = ({ Icon }) => {
-    const StyledIcon = styled(Icon)`
+
+const StyledTasks = styled(FaListUl)`
         min-width: 60px;
         font-size: 20px;
         color: inherit;
-    `;
+`;
 
-    return <StyledIcon></StyledIcon>;
-};
+const StyledBiLogOut = styled(BiLogOut)`
+        min-width: 60px;
+        font-size: 20px;
+        color: inherit;
+`;
+
+const StyledVscAccount= styled(VscAccount)`
+        min-width: 60px;
+        font-size: 20px;
+        color: inherit;
+`;
+
+
+const StyledFiSun = styled(FiSun)`
+        min-width: 60px;
+        font-size: 20px;
+        color: inherit;
+`;
+
+const StyledBsMoon = styled(BsMoon)`
+        min-width: 60px;
+        font-size: 20px;
+        color: inherit;
+`;
+
 
 /*
     Div para los elementos del fondo
@@ -200,7 +214,7 @@ const Logout = styled(NavLink)``;
 /*
     Container para el botón de Modo oscuro
 */
-const ModoOscuro = styled.div`
+const ModoOscuro = styled(NavLink)`
     height: 50px;
     margin-top: 10px;
     list-style: none;
@@ -208,27 +222,40 @@ const ModoOscuro = styled.div`
     align-items: center;
     border-radius: 10px;
     transition: all 0.4s ease;
+    color: inherit;
     cursor: pointer;
-
-    :hover {
-        background: darkgray;
-        color: white;
-    }
 `;
 
 /*
     Texto para el contenido del modo oscuro
 */
 const StyledText = styled.div`
+    transition: all 0.2s ease;
+    
     height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     text-decoration: none;
     cursor: pointer;
     color: inherit;
     font-size: 24px;
-    transition: all 0.2s ease;
+
 `;
+
+const StyledButton = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: 24px;
+`;
+
+
+
 
 const Navbar = () => {
     let { logoutUser, auth } = useContext(AuthContext);
@@ -250,57 +277,59 @@ const Navbar = () => {
             </Header>
 
             <MenuBar>
-                    <MenuLinks>
-                        <NavLink>
-                            <StyledLink to="/tareas">
-                                <TaskIcon Icon={FaListUl} />
-                                <NavText open={open}>Tareas s</NavText>
-                            </StyledLink>
-                        </NavLink>
+                <MenuLinks>
+                    <NavLink>
+                        <StyledLink to="/tareas">
+                            <StyledTasks />
+                            <NavText open={open}>Tareas</NavText>
+                        </StyledLink>
+                    </NavLink>
 
-                        <NavLink>
-                            <StyledLink to="/tareas">
-                                <TaskIcon Icon={FaListUl} />
-                                <NavText open={open}>Tareas 2</NavText>
-                            </StyledLink>
-                        </NavLink>
+                    <NavLink>
+                        <StyledLink to="/tareas">
+                            <StyledTasks />
+                            <NavText open={open}>Tareas 2</NavText>
+                        </StyledLink>
+                    </NavLink>
 
-                        <NavLink>
-                            <StyledLink to="/tareas">
-                                <TaskIcon Icon={FaListUl} />
-                                <NavText open={open}>Tareas s</NavText>
-                            </StyledLink>
-                        </NavLink>
-                    </MenuLinks>
+                    <NavLink>
+                        <StyledLink to="/tareas">
+                            <StyledTasks />
+                            <NavText open={open}>Tareas 3</NavText>
+                        </StyledLink>
+                    </NavLink>
+
+
+                </MenuLinks>
                 <BottomContent>
                     <Logout>
-                        {auth ? <StyledLink to="/">
-                            <TaskIcon Icon={BiLogOut} />
-                            <NavText onClick={logoutUser} open={open}>
-                                Cerrar Sesión
-                            </NavText>
-                        </StyledLink> :
-                        <StyledLink to="/login">
-                                <TaskIcon Icon={VscAccount} />
+                        {auth ? (
+                            <StyledText onClick={logoutUser}>
+                                <StyledBiLogOut  />
+                                <NavText open={open}>
+                                    Cerrar Sesión
+                                </NavText>
+                            </StyledText>
+                        ) : (
+                            <StyledLink to="/login">
+                                <StyledVscAccount />
                                 <NavText open={open}>Iniciar Sesión</NavText>
                             </StyledLink>
-                        }
+                        )}
                     </Logout>
-                    <ModoOscuro>
+                    <ModoOscuro onClick={() => setDarkMode(!darkMode)}>
                         {darkMode ? (
-                            <>
-                                <TaskIcon Icon={FiSun} />
-                                <NavText>
-                                    <StyledText open={open}>Modo Claro</StyledText>
+                            <StyledButton>
+                                <StyledFiSun />
+                                <NavText open={open}>
+                                    Modo Claro
                                 </NavText>
-                            </>
+                            </StyledButton>
                         ) : (
-                            <>
-                                <TaskIcon Icon={BsMoon} />
-                                <StyledText>
+                            <StyledButton>
+                                <StyledBsMoon />
                                     <NavText open={open}>Modo Oscuro</NavText>
-                                </StyledText>
-                            </>
+                            </StyledButton>
                         )}
                     </ModoOscuro>
                 </BottomContent>

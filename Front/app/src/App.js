@@ -5,6 +5,7 @@ import { AnonymousRoute } from "./utils";
 import { AuthProvider } from "./contexts/AuthContext";
 import { SideBarProvider } from "./contexts/SideBarContext";
 import styled from "styled-components";
+import LoadingRing from "./components/Loading";
 //rafce
 //imd
 
@@ -21,10 +22,10 @@ function App() {
             <SideBarProvider>
                 <BrowserRouter>
                     <AuthProvider>
-                        {/* <Navbar></Navbar> */}
                         <Routes>
                             <Route element={<AnonymousRoute navBar={true} component={<HomePage />} />} path="/" exact />
-                            <Route element={<AnonymousRoute navBar={false} component={<Login />} />} path="/login" />
+                            <Route element={<AnonymousRoute navBar={false} component={<LoadingRing />} />} path="/l" exact />
+                            <Route element={<AnonymousRoute navBar={false} component={<Login />} />} path="/login" exact/>
                             <Route element={<PrivateRoute component={<ToDo />} />} path="/tareas" />
                         </Routes>
                     </AuthProvider>

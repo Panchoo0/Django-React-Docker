@@ -12,3 +12,12 @@ body {
     height: 100%;
     background: #E4E9F7;
 }
+
+html, body {
+    min-height: 100% !important;
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}

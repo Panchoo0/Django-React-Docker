@@ -5,18 +5,17 @@ import { Navbar } from "../components";
 import { GlobalStyles } from "../components/Global/CSSVariables"
 
 const AnonymousRoute = ({ component, navBar }) => {
-    let { open } = useContext(SideBarContext);
-
+    let { open, darkMode } = useContext(SideBarContext);
     return (
         <>  
-        <GlobalStyles open={open}/>
+        <GlobalStyles darkMode={darkMode}/>
             {navBar ? (
                 <>
                     <Navbar></Navbar>
                     <ContentWrapperNavbar open={open}>{component}</ContentWrapperNavbar>
                 </>
             ) : (
-                <ContentWrapper open={open}>{component}</ContentWrapper>
+                <ContentWrapper >{component}</ContentWrapper>
             )}
         </>
     );

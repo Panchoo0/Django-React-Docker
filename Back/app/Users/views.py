@@ -21,7 +21,6 @@ def createUser(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def logoutUser(request):
-    print("sii")
     refresh_token = request.data["refresh"]
     token = RefreshToken(refresh_token)
     token.blacklist()
