@@ -6,7 +6,7 @@ export default SideBarContext;
 
 export const SideBarProvider = ({ children }) => {
     const [open, setOpen] = useState(true);
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
 
     let contextData = {
         open: open,

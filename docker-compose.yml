@@ -1,7 +1,7 @@
 version: "3.9"
 services:
-  db:
-    container_name: db
+  db2:
+    container_name: db2
     build:  
       context: ./DB
     ports:
@@ -21,8 +21,8 @@ services:
       retries: 5
       start_period: 15s
 
-  front:
-    container_name: front
+  front2:
+    container_name: front2
     environment:
       - WATCHPACK_POLLING=true
     build:  
@@ -34,8 +34,8 @@ services:
        - /code/front/app/node_modules
     command: npm start
 
-  back:
-    container_name: back
+  back2:
+    container_name: back2
     build:
       context: ./back
     ports:
@@ -44,9 +44,12 @@ services:
       - ./back/:/code/back
     env_file:
       - .env
-    command: python manage.py runserver 0.0.0.0:8000
+    command:  >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     depends_on:
-      db:
+      db2:
         condition: service_healthy
 
   

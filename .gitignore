@@ -1,9 +1,8 @@
-.env
 
 DB/db/*
 
 Back/app/db.sqlite3
-*/__pycache__/*
+*.pyc
 Back/data/*
 
 Front/app/node_modules/*

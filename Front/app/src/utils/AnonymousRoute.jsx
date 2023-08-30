@@ -6,6 +6,7 @@ import { GlobalStyles } from "../components/Global/CSSVariables"
 
 const AnonymousRoute = ({ component, navBar }) => {
     let { open, darkMode } = useContext(SideBarContext);
+    console.log(darkMode)
     return (
         <>  
         <GlobalStyles darkMode={darkMode}/>

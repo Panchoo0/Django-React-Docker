@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { CONFIG } from "../utils";
-
 import styled from "styled-components";
 import LoadingRing from "../components/Loading";
 
@@ -230,9 +229,10 @@ const ToDo = ({}) => {
         NewTask[index].checked = !NewTask[index].checked;
         setTask(NewTask);
     };
+    
     return (
         <ContentWrapper>
-            <StyleTasks>
+            <StyleTasks id="HOLA">
             {loading ? <LoadingRing size={200} color={"red"} /> :
                 <>
                 {/* <LoadingRing size={120} color="red" /> */}

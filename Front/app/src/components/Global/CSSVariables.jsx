@@ -46,7 +46,7 @@ export const GlobalStylesDark = createGlobalStyle`
 export const GlobalStyles = ({darkMode}) => {
 
     return (<>
-      {!true ?
+      {!darkMode ?
         <GlobalStylesLight theme={THEMES}/> : <GlobalStylesDark theme={THEMES}/>
       }
 
